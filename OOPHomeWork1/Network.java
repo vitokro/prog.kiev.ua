@@ -1,6 +1,5 @@
 package OOPHomeWork1;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,5 +29,12 @@ public class Network {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Network{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

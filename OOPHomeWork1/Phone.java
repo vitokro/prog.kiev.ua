@@ -60,6 +60,15 @@ public class Phone {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return "Phone{" +
+                "number='" + number + '\'' +
+                ", network=" + network +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public void setName(String name) {
         this.name = name;
     }
