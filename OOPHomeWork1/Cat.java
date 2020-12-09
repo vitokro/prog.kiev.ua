@@ -28,7 +28,7 @@ public class Cat {
     }
 
     public Cat[] giveBirth(Cat parent2){
-        if (Objects.equals("male", sex) || parent2.sex.equals("female"))
+        if (Objects.equals(this.sex, parent2.sex) || Objects.equals(this.sex, null))
             return null;
         else {
             Random ran = new Random();
