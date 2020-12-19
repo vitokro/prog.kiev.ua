@@ -4,17 +4,12 @@ public class Triangle extends Shape {
     private Point point1;
     private Point point2;
     private Point point3;
-    private final double side1;
-    private final double side2;
-    private final double side3;
 
     public Triangle(Point point1, Point point2, Point point3) {
         this.point1 = point1;
         this.point2 = point2;
         this.point3 = point3;
-        side1 = Point.getDistance(point1, point2);
-        side2 = Point.getDistance(point1, point3);
-        side3 = Point.getDistance(point3, point2);
+
     }
 
 
@@ -49,6 +44,9 @@ public class Triangle extends Shape {
 
     @Override
     public double getArea() {
+        double side1 = Point.getDistance(point1, point2);
+        double side2 = Point.getDistance(point1, point3);
+        double side3 = Point.getDistance(point3, point2);
         double p = (side1 + side2 + side3) / 2;
         return Math.sqrt(p * (p - side1) * (p - side1) * (p - side1));
     }
