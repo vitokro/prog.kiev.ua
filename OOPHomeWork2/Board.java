@@ -3,12 +3,16 @@ package OOPHomeWork2;
 import java.util.Arrays;
 
 public class Board {
-    private Shape[] figures = new Shape[4];
+    private final Shape[] figures = new Shape[4];
 
     public Board() {
     }
 
     public void put(Shape f, int index){
+        if (index < 0 || index > 3) {
+            System.out.println("Cannot add shape to impossible part of the board");
+            return;
+        }
         if (figures[index] != null)
             System.out.println("This part is busy");
         else{

@@ -4,9 +4,9 @@ public class Triangle extends Shape {
     private Point point1;
     private Point point2;
     private Point point3;
-    private double side1;
-    private double side2;
-    private double side3;
+    private final double side1;
+    private final double side2;
+    private final double side3;
 
     public Triangle(Point point1, Point point2, Point point3) {
         this.point1 = point1;
@@ -44,7 +44,7 @@ public class Triangle extends Shape {
 
     @Override
     public double getPerimetr() {
-        return side1 + side2 + side3;
+        return Point.getDistance(point1, point2) + Point.getDistance(point3, point2) + Point.getDistance(point1, point3);
     }
 
     @Override

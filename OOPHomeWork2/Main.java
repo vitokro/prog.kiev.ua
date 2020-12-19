@@ -25,6 +25,7 @@ public class Main {
         b.put(tr, 0);
         b.put(s, 1);
         b.put(c, 3);
+        b.put(c, 6);
         System.out.println("totalArea = "+ b.getTotalArea());
     }
 }
