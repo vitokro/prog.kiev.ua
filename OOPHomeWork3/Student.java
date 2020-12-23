@@ -4,7 +4,7 @@ public class Student extends Human {
 
     private String bookId;
 
-    public Student(String bookId) {
+    public Student() {
     }
 
     public Student(String name, String surname, int age, Sex sex, String bookId) {

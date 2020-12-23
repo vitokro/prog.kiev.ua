@@ -37,8 +37,10 @@ public class Group {
     public void delStudent(String bookId) throws NoStudentsInGroupException {
         for (int i = 0; i < count; i++) {
             if (students[i].getBookId().equals(bookId)){
-                students[i] = null;
-                count--;
+                for (int j = i; j < count - 1; j++) {
+                    students[j] = students[j + 1];
+                }
+                students[--count] = null;
                 return;
             }
         }
