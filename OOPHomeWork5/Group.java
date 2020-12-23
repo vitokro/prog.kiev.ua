@@ -21,6 +21,28 @@ public class Group implements Voencom{
     public Group() {
     }
 
+    public static Group loadFromFile(File f) throws IOException {
+        Group gr = new Group();
+        try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+            gr.setName(br.readLine());
+            String str = "";
+            while((str = br.readLine()) != null){
+                String[] loadStudent = str.split(",");
+                String name = loadStudent[2].trim();
+                String surname = loadStudent[3].trim();
+                Sex sex = Sex.valueOf(loadStudent[4].trim());
+                int age = Integer.parseInt(loadStudent[5].trim());
+                String bookId = loadStudent[0];
+                try {
+                    gr.addStudent(new Student(name, surname, age, sex, bookId));
+                } catch (TooManyStudentsException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return gr;
+    }
+
     public String getName() {
         return name;
     }
@@ -113,28 +135,6 @@ public class Group implements Voencom{
                 bf.newLine();
             }
         }
-    }
-
-    public static Group loadFromFile(File f) throws IOException {
-        Group gr = new Group();
-        try (BufferedReader br = new BufferedReader(new FileReader(f))) {
-            gr.setName(br.readLine());
-            String str = "";
-            while((str = br.readLine()) != null){
-                String[] loadStudent = str.split(",");
-                String name = loadStudent[2].trim();
-                String surname = loadStudent[3].trim();
-                Sex sex = Sex.valueOf(loadStudent[4].trim());
-                int age = Integer.parseInt(loadStudent[5].trim());
-                String bookId = loadStudent[0];
-                try {
-                    gr.addStudent(new Student(name, surname, age, sex, bookId));
-                } catch (TooManyStudentsException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return gr;
     }
 
     @Override
