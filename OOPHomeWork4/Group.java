@@ -1,11 +1,9 @@
 package OOPHomeWork4;
 
 import OOPHomeWork4.Human.Sex;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static OOPHomeWork4.Human.Sex.MALE;
@@ -76,13 +74,17 @@ public class Group implements Voencom{
     public void delStudent(String bookId) throws NoStudentsInGroupException {
         for (int i = 0; i < count; i++) {
             if (students[i].getBookId().equals(bookId)){
-                students[i] = null;
-                count--;
+                for (int j = i; j < count - 1; j++) {
+                    students[j] = students[j + 1];
+                }
+                students[--count] = null;
                 return;
             }
         }
         throw new NoStudentsInGroupException();
     }
+
+
 
     public Student findStudent(String surname){
         if (surname == null)

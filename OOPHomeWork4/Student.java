@@ -4,6 +4,9 @@ public class Student extends Human {
 
     private String bookId;
 
+    public Student() {
+    }
+
     public Student(String bookId) {
     }
 
