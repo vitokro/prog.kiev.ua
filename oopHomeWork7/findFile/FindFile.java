@@ -7,6 +7,9 @@ public class FindFile implements Runnable{
     private File dir;
     private File file;
 
+    public FindFile() {
+    }
+
     public FindFile(File dir, File file) {
         this.dir = dir;
         this.file = file;

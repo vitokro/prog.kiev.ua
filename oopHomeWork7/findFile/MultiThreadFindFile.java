@@ -10,9 +10,9 @@ public class MultiThreadFindFile {
     private File file;
     private ExecutorService exSer;
 
-    public static void main(String[] args) {
-
+    public MultiThreadFindFile() {
     }
+
     public MultiThreadFindFile(File dir, File file, int threadNumber) {
         this.dir = dir;
         this.file = file;
@@ -34,5 +34,21 @@ public class MultiThreadFindFile {
             if (file.getName().equalsIgnoreCase(files[i].getName()))
                 System.out.println(files[i].getCanonicalFile());
         }
+    }
+
+    public File getDir() {
+        return dir;
+    }
+
+    public void setDir(File dir) {
+        this.dir = dir;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 }
