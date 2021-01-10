@@ -20,22 +20,18 @@ public class CountLetters {
     }
     // списав частину рішення з конспекта, але відчуваю, що можна було зробити краще,
     // але так і не придумав як
-    public void countWithLambda(){
-        try {
-           var list = Files.lines(file.toPath())
-                   .map(n -> caseInsensitive ? n.toUpperCase() : n)
-                   .flatMapToInt(String::chars)
-                   .filter(n -> Character.isLetter(n))
-                   .mapToObj((n) -> (Character.valueOf((char) n)))
-                   .collect(Collectors.groupingBy(n -> n, Collectors.counting()))
-                   .entrySet()
-                   .stream()
-                   .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-                   .collect(Collectors.toList());
-           System.out.println(list);
-       } catch (IOException e) {
-           System.out.println(e);
-       }
+    public void countWithLambda() throws IOException {
+       var list = Files.lines(file.toPath())
+               .map(n -> caseInsensitive ? n.toUpperCase() : n)
+               .flatMapToInt(String::chars)
+               .filter(n -> Character.isLetter(n))
+               .mapToObj((n) -> (Character.valueOf((char) n)))
+               .collect(Collectors.groupingBy(n -> n, Collectors.counting()))
+               .entrySet()
+               .stream()
+               .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+               .collect(Collectors.toList());
+       System.out.println(list);
    }
     public void count() throws IOException {
 

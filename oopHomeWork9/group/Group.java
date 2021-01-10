@@ -115,6 +115,8 @@ public class Group implements Voencom, Serializable {
         Collections.sort(students, Comparator.nullsLast(Comparator.comparing(Human::getName)));
     }
 
+    pub
+
     @Override
     public String toString() {
         sortBySurname();
