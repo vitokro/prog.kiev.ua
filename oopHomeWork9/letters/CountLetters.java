@@ -20,7 +20,7 @@ public class CountLetters {
     }
     // списав частину рішення з конспекта, але відчуваю, що можна було зробити краще,
     // але так і не придумав як
-    public void countWithLambda() throws IOException {
+    public void countWithStreamApi() throws IOException {
        var list = Files.lines(file.toPath())
                .map(n -> caseInsensitive ? n.toUpperCase() : n)
                .flatMapToInt(String::chars)

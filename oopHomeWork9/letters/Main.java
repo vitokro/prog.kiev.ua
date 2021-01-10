@@ -12,11 +12,11 @@ public class Main {
 //повторения.
         CountLetters countLetters = new  CountLetters(
                 "src\\oopHomeWork9\\letters\\CountLetters.java", false);
-        CountLetters countLettersLambda = new  CountLetters(
+        CountLetters countLettersStream = new  CountLetters(
                 "src\\oopHomeWork9\\letters\\CountLetters.java", false);
         try {
             countLetters.count();
-            countLettersLambda.countWithLambda();
+            countLettersStream.countWithStreamApi();
         } catch (IOException e) {
             e.printStackTrace();
         }

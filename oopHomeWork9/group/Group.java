@@ -115,7 +115,11 @@ public class Group implements Voencom, Serializable {
         Collections.sort(students, Comparator.nullsLast(Comparator.comparing(Human::getName)));
     }
 
-    pub
+    public List<Student> getStudentsByFirstLetter(String s){
+        return students.stream()
+                       .filter(n -> n.getSurname().startsWith(s.toUpperCase()))
+                       .collect(Collectors.toList());
+    }
 
     @Override
     public String toString() {

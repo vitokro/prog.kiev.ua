@@ -20,6 +20,15 @@ public class Main {
         delSomeStudents2(group);
         loadGroup(f);
         recruts(group);
+
+//1. Напишите методы, которые позволят выделить из группы студентов тех, у
+//кого фамилия начинается с определенной буквы.
+        getStudentsByFirstLetter(group);
+    }
+
+    private static void getStudentsByFirstLetter(Group group) {
+        System.out.println("Surname starts with M");
+        System.out.println(group.getStudentsByFirstLetter("M"));
     }
 
     private static void recruts(Group group) {
