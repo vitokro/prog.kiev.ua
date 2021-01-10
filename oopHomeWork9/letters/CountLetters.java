@@ -3,7 +3,9 @@ package oopHomeWork9.letters;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CountLetters {
     private File file;
@@ -16,8 +18,27 @@ public class CountLetters {
 
     public CountLetters() {
     }
-
+    // списав частину рішення з конспекта, але відчуваю, що можна було зробити краще,
+    // але так і не придумав як
+    public void countWithLambda(){
+        try {
+           var list = Files.lines(file.toPath())
+                   .map(n -> caseInsensitive ? n.toUpperCase() : n)
+                   .flatMapToInt(String::chars)
+                   .filter(n -> Character.isLetter(n))
+                   .mapToObj((n) -> (Character.valueOf((char) n)))
+                   .collect(Collectors.groupingBy(n -> n, Collectors.counting()))
+                   .entrySet()
+                   .stream()
+                   .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                   .collect(Collectors.toList());
+           System.out.println(list);
+       } catch (IOException e) {
+           System.out.println(e);
+       }
+   }
     public void count() throws IOException {
+
         try (FileReader fr = new FileReader(file)) {
             char[] buffer = new char[1024];
             int bytes;

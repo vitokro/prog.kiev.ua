@@ -10,10 +10,13 @@ public class Main {
 //относительную частоту повторения каждой буквы и выведите на
 //экран результат в порядке убывания относительной частоты
 //повторения.
+        CountLetters countLetters = new  CountLetters(
+                "src\\oopHomeWork9\\letters\\CountLetters.java", false);
+        CountLetters countLettersLambda = new  CountLetters(
+                "src\\oopHomeWork9\\letters\\CountLetters.java", false);
         try {
-            new CountLetters(
-                    "src\\oopHomeWork9\\letters\\CountLetters.java", true)
-                    .count();
+            countLetters.count();
+            countLettersLambda.countWithLambda();
         } catch (IOException e) {
             e.printStackTrace();
         }
