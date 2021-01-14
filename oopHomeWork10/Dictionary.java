@@ -30,22 +30,16 @@ public class Dictionary {
     }
 
     private String internalTranslate(String engWord) {
-        String ukrWord = checkPunctuation(engWord.toLowerCase());
-        return ukrWord == null ? engWord : ukrWord;
-    }
-
-    private String checkPunctuation(String engWord) {
+        engWord = engWord.toLowerCase();
         char lastChar = engWord.charAt(engWord.length() - 1);
         if (punctuation.contains(lastChar)) {
-            String ukrWord = dictionary.get(engWord.substring(0, engWord.length() - 1));
+            String engW = engWord.substring(0, engWord.length() - 1);
+            String ukrWord = dictionary.getOrDefault(engW, engW);
             return ukrWord + lastChar;
-        }
-        else {
-            String ukrWord = dictionary.get(engWord);
-            return ukrWord;
-        }
+        } else
+            return dictionary.getOrDefault(engWord, engWord);
     }
-
+    
     private void saveUkrToFile(Stream<String> ukrWords) {
         try (BufferedWriter bf = new BufferedWriter(new FileWriter(UKR_FILE))) {
            ukrWords.forEach(ukrWord -> {
