@@ -20,7 +20,7 @@ public class Main {
 
 //3. Решить задачу подсчета повторяющихся элементов в массиве с
 //помощью HashMap.
-        statArray();
+//        statArray();
     }
 
     private static void statArray() {

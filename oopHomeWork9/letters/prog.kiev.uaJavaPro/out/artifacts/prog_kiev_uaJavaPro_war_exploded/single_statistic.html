@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Statistic</title>
+</head>
+<body>
+<table border="5">
+    <caption>Statistic by user: %s</caption>
+    <tr>
+        <th></th>
+        <th>Do you like red cats?</th>
+        <th>Do you like white rats?</th>
+    </tr>
+    <tr><td><b>Yes</b></td><td>%d</td><td>%d</td></tr>
+    <tr><td><b>No</b></td><td>%d</td><td>%d</td></tr>
+</table>
+<a href="questionnaire.jsp">Answer again</a>
+
+<form action = "/fullStatistic" method = "GET">
+    <input type="submit" value = "Show full statistic"></p>
+</form>
+<br>Click this link to <a href="/login?a=exit">logout</a>
+</body>
+</html>
