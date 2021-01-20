@@ -1,0 +1,8 @@
+6
+5
+elders=12
+crossroads=343346
+blackBall=black
+redBall=red
+joe=Ї
+jennifer=0
