@@ -29,6 +29,7 @@ public class Message {
 	public static Message fromJSON(String s) {
 		Gson gson = new GsonBuilder().create();
 		return gson.fromJson(s, Message.class);
+//		sdjkfhskjf
 	}
 	
 	@Override
