@@ -34,6 +34,8 @@ public class GetThread implements Runnable {
                     JsonMessages list = gson.fromJson(strBuf, JsonMessages.class);
                     if (list != null) {
                         for (Message m : list.getList()) {
+                            if (m.getFileId() != 0 && login.equals(m.getFrom()))
+                                continue;
                             if ("Server".equals(m.getFrom()))
                                 Utils.printGreen(m.toString());
                             else if (login.equals(m.getFrom()))
@@ -45,6 +47,7 @@ public class GetThread implements Runnable {
                             else
                                 Utils.print(m.toString());
                             n++;
+                            checkFile(m);
                         }
                     }
                 } finally {
@@ -55,6 +58,27 @@ public class GetThread implements Runnable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private boolean checkFile(Message m) {
+        int fileId = m.getFileId();
+        if (fileId != 0 && (login.equals(m.getTo()) || "All".equals(m.getTo()))) {
+            DownloadedFiles.INSTANCE.setFile(fileId, getFileName(m));
+            return true;
+        }
+        return false;
+    }
+
+    private String getFileName(Message m) {
+        String[] s = m.getText().split(" ");
+        String fileName = "";
+        for (int i = 0; i < s.length; i++) {
+            if (s[i].equals("file")) {
+                fileName = s[i + 1];
+                break;
+            }
+        }
+        return fileName;
     }
 
 }

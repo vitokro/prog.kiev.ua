@@ -13,6 +13,8 @@ public class Message {
 	private String to;
 	private String text;
 	private String chatRoom;
+	private int fileId;
+
 
 	public Message(String from, String text) {
 		this.from = from;
@@ -89,5 +91,9 @@ public class Message {
 
 	public void setChatRoom(String chatRoom) {
 		this.chatRoom = chatRoom;
+	}
+
+	public int getFileId() {
+		return fileId;
 	}
 }

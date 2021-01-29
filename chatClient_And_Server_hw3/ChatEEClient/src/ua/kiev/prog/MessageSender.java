@@ -7,6 +7,14 @@ import ua.kiev.prog.json.Message;
 import ua.kiev.prog.json.UserState;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class MessageSender {
@@ -74,9 +82,9 @@ public class MessageSender {
     private void internalSendMsg(String to, String text, boolean isChat) throws IOException {
         Message m;
         if (isChat)
-            m = new Message(login, to,  text, to);
+            m = new Message(login, to, text, to);
         else
-            m = new Message(login, to,  text);
+            m = new Message(login, to, text);
         int resp = m.send();
         if (resp != 200) { // 200 OK
             System.out.println("HTTP error occurred: " + resp);
@@ -87,7 +95,7 @@ public class MessageSender {
     public void changeState() throws IOException {
         Utils.print("Type 1 for active state or 2 for inactive state:");
         String state = "";
-        while (!(state.equals("1") || state.equals("2"))){
+        while (!(state.equals("1") || state.equals("2"))) {
             state = scanner.nextLine();
         }
         String stateFull = state.equals("1") ? " state: active" : " state: inactive";
@@ -103,18 +111,26 @@ public class MessageSender {
     public void createChatRoom() throws IOException {
         Utils.print("Type nicknames who you want to add to this chatroom, separated by whitespace:");
         String str = "";
-        while (str.isEmpty()){
+        while (str.isEmpty()) {
             str = scanner.nextLine();
         }
         str += " " + login;
         List<String> users = List.of(str.split(" "));
 
         Utils.print("Type name of chatroom");
-        String name  = "";
-        while (name.isEmpty()){
+        String name = "";
+        while (name.isEmpty()) {
             name = scanner.nextLine();
         }
         new ChatRoom(name, users).send();
     }
 
+
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void downloadFile() {
+    }
 }
