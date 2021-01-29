@@ -4,6 +4,7 @@ import ua.kiev.prog.json.AvailableChatsAndUserStates;
 import ua.kiev.prog.json.User;
 import ua.kiev.prog.json.UserState;
 
+import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -16,6 +17,7 @@ public enum Data {
     private static ConcurrentMap<String, String> credentials = new ConcurrentHashMap<>();
     private static ConcurrentMap<String, String> usersStates = new ConcurrentHashMap<>();
     private static ConcurrentMap<String, List<String>> chatRooms = new ConcurrentHashMap<>();
+    private static ConcurrentMap<Integer, Path> files = new ConcurrentHashMap<>();
 
     public boolean tryLogin(User user) {
         String login = user.getLogin();
@@ -62,5 +64,17 @@ public enum Data {
                 .map(entry -> new UserState(entry.getKey(), entry.getValue()))
                 .collect(toList());
         return new AvailableChatsAndUserStates(chats, userStates);
+    }
+
+    public void addFile(int fileId, Path file) {
+        files.put(fileId, file);
+    }
+
+    public Path getFile(int fileId) {
+        return files.get(fileId);
+    }
+
+    public Path delFile(int fileId) {
+        return files.remove(fileId);
     }
 }

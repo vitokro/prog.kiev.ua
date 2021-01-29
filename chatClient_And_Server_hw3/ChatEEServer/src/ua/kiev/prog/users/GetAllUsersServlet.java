@@ -25,6 +25,7 @@ public class GetAllUsersServlet  extends HttpServlet {
         if (json != null) {
             PrintWriter pw = resp.getWriter();
             pw.print(json);
+            pw.close();
         }
     }
 }

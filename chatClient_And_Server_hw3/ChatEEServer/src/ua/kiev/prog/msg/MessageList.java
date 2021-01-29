@@ -1,6 +1,7 @@
 package ua.kiev.prog.msg;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -37,5 +38,9 @@ public enum MessageList {
 		if (n >= loginList.size())
 			return null;
 		return gson.toJson(new JsonMessages(loginList, n));
+	}
+
+	public void deleteByFileId(int fileId) {
+		list.removeIf(message -> message.getFileId() == fileId);
 	}
 }

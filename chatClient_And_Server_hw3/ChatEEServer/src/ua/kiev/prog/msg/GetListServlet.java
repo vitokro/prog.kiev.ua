@@ -37,11 +37,10 @@ public class GetListServlet extends HttpServlet {
 		
 		String json = msgList.toJSON(login, from);
 		if (json != null) {
-			OutputStream os = resp.getOutputStream();
-            byte[] buf = json.getBytes(StandardCharsets.UTF_8);
-			os.write(buf);
-			//PrintWriter pw = resp.getWriter();
-			//pw.print(json);
+			try (OutputStream os = resp.getOutputStream()) {
+				byte[] buf = json.getBytes(StandardCharsets.UTF_8);
+				os.write(buf);
+			}
 		}
 	}
 }
