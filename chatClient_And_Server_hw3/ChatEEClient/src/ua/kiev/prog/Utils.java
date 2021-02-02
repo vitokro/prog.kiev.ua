@@ -7,8 +7,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class Utils {
     public static final String ANSI_RESET = "\u001B[0m";
@@ -28,68 +26,27 @@ public class Utils {
     }
 
     public static int send(String endpoint, String json) throws IOException {
-        URL obj = new URL(getURL() + endpoint);
-        HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
-
+        HttpURLConnection conn = getHttpURLConnection(endpoint);
         conn.setRequestMethod("POST");
         conn.setDoOutput(true);
-
-        OutputStream os = conn.getOutputStream();
-        try {
-            os.write(json.getBytes(StandardCharsets.UTF_8));
-            return conn.getResponseCode();
-        } finally {
-            os.close();
-        }
-    }
-
-    public static int sendFile(String endpoint, byte[] file) throws IOException {
-        URL obj = new URL(getURL() + endpoint);
-        HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
-
-        conn.setRequestMethod("POST");
-        conn.setDoOutput(true);
-        conn.setRequestProperty("Content-Type", "binary/octet-stream");
 
         try (OutputStream os = conn.getOutputStream()) {
-            os.write(file);
+            os.write(json.getBytes(StandardCharsets.UTF_8));
             return conn.getResponseCode();
         }
     }
 
-    public static int downloadFile(String endpoint, Path file) throws IOException {
+    static HttpURLConnection getHttpURLConnection(String endpoint) throws IOException {
         URL obj = new URL(getURL() + endpoint);
-        HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
-        final int responseCode = conn.getResponseCode();
-        try (InputStream is = conn.getInputStream()) {
-            byte[] buf = Utils.responseBodyToArray(is);
-            try {
-                Files.write(file, buf);
-            } catch (IOException e) {
-                Utils.printErr("Something went wrong during saving file to your PC");
-            }
-        }
-        return responseCode;
-    }
-
-    public static int delFileFromServer(String endpoint) throws IOException {
-        URL obj = new URL(getURL() + endpoint);
-        HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
-        conn.setRequestMethod("DELETE");
-        final int responseCode = conn.getResponseCode();
-        return conn.getResponseCode();
+        return (HttpURLConnection) obj.openConnection();
     }
 
     public static String sendGetReqWithAnswer(String endpoint) throws IOException {
-        URL url = new URL(getURL() + endpoint);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        HttpURLConnection conn = getHttpURLConnection(endpoint);
 
-        InputStream is = conn.getInputStream();
-        try {
+        try (InputStream is = conn.getInputStream()) {
             byte[] buf = responseBodyToArray(is);
             return new String(buf, StandardCharsets.UTF_8);
-        } finally {
-            is.close();
         }
     }
 

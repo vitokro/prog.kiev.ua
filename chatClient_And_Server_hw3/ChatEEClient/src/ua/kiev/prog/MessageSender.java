@@ -7,15 +7,8 @@ import ua.kiev.prog.json.Message;
 import ua.kiev.prog.json.UserState;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 public class MessageSender {
     private String login;
@@ -34,7 +27,6 @@ public class MessageSender {
         usersAndChats = json.fromJson(users, AvailableChatsAndUserStates.class);
         Utils.print("List of all users and their states:");
         usersAndChats.getUserStates()
-                .stream()
                 .forEach(userState -> Utils.printYell("User " + userState.getLogin() + userState.getState()));
         Utils.print("List of all your chatrooms:");
         usersAndChats.getChats().forEach(Utils::printYell);
@@ -125,12 +117,4 @@ public class MessageSender {
         new ChatRoom(name, users).send();
     }
 
-
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void downloadFile() {
-    }
 }
